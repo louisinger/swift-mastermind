@@ -1,2 +1,2 @@
 let game = Mastermind()
-game.writeGame()
+game.playGame()
