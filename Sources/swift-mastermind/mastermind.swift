@@ -6,6 +6,8 @@ class Mastermind {
     var playing = false
     var score : Int = 0
     var playerWin = false
+    var lines : Array<Line> = []
+    var results : Array<Array<Int>> = []
 
     init() {
         self.code = Line.randomLine()
@@ -19,7 +21,7 @@ class Mastermind {
         var turnNumber = 0
         self.playing = true
         var playerLine : Line
-        var lastResult : Array<Int>
+        var result : Array<Int>
 
         let startDate = Date()
 
@@ -28,19 +30,21 @@ class Mastermind {
             playerLine = Line.randomLine()
             // ---
 
-            lastResult = playerLine.result(compareTo: self.code)
+            result = playerLine.result(compareTo: self.code)
 
             // --- Print the line and his result (A REMPLACER)
-            print("player plays: \(playerLine) | \(lastResult)")
+            print("player plays: \(playerLine) | \(result)")
             // ---
 
-            if lastResult[0] == 4 {
+            if result[0] == 4 {
                 self.playing = false
                 self.playerWin = true
             }
             else {
                 turnNumber += 1
             }
+            self.lines.append(playerLine)
+            self.results.append(result)
         }
         if self.playing {self.playing = false}
         var elapsed = Date().timeIntervalSince(startDate)
